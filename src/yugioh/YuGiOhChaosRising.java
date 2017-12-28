@@ -5,6 +5,9 @@
  */
 package yugioh;
 
+import yugioh.chaosrising.duel.cntl.DuelCntl;
+import yugioh.chaosrising.userinterface.UserInterface;
+import yugioh.chaosrising.userinterface.UserInterfaceCntl;
 import yugioh.testharness.MasterTestHarness;
 
 /**
@@ -26,6 +29,7 @@ public class YuGiOhChaosRising {
             }
         }
 
+        UserInterfaceCntl.getInstance().loadDuel();
     }
     
 }
