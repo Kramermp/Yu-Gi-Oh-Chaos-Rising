@@ -14,7 +14,7 @@ public class DuelUI extends JPanel{
 	public DuelUI(DuelCntl duelCntl) {
 		this.parentCntl = duelCntl;
 		configurePanel();
-		buildSpacepanelArray();
+		buildSpacePanelArray();
 		drawBoard();
 		setBackground(Color.BLUE);
 	}
@@ -23,7 +23,7 @@ public class DuelUI extends JPanel{
 		setLayout(new GridBagLayout());
 	}
 
-	private void buildSpacepanelArray() {
+	private void buildSpacePanelArray() {
 		Dimension boardDimension = parentCntl.getBoardDimensions();
 		spacePanelArray = new SpacePanel[boardDimension.height][boardDimension.width];
 		for(int i = 0; i < spacePanelArray.length; i++) {

@@ -8,6 +8,7 @@ package yugioh.chaosrising.board;
 import yugioh.chaosrising.card.MonsterType;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -133,6 +134,35 @@ public class Space {
 	}
 
 	public static Space getTestSpace() {
-		return new Space(DEFAULT_SPACETYPE);
+		return new Space(getRandomSpaceType());
+	}
+
+	public static SpaceType getRandomSpaceType() {
+    	Random rng = new Random();
+    	switch(rng.nextInt(10)) {
+			case 0:
+				return SpaceType.MEADOW;
+			case 1:
+				return SpaceType.NORMAL;
+			case 2:
+				return SpaceType.WATER;
+			case 3:
+				return SpaceType.CRUSH;
+			case 4:
+				return SpaceType.DARK;
+			case 5:
+				return SpaceType.FOREST;
+			case 6:
+				return SpaceType.LABYRINTH;
+			case 7:
+				return SpaceType.MOUNTAIN;
+			case 8:
+				return SpaceType.TOON;
+			case 9:
+				return SpaceType.WASTELAND;
+			default:
+				return DEFAULT_SPACETYPE;
+		}
+
 	}
 }
