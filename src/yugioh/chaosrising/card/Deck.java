@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaosrising;
+package yugioh.chaosrising.card;
+
+import yugioh.chaosrising.card.Card;
 
 import java.util.ArrayList;
 

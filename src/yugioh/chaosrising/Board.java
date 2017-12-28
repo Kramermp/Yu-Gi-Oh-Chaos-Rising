@@ -5,6 +5,8 @@
  */
 package yugioh.chaosrising;
 
+import yugioh.chaosrising.card.CardEntity;
+
 import java.util.ArrayList;
 
 /**

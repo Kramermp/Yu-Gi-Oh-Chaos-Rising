@@ -5,11 +5,14 @@
  */
 package yugioh;
 
+import yugioh.chaosrising.GameCntl;
 import yugioh.testharness.MasterTestHarness;
 
 /**
- *
+ * This serves class serves as the entry point to the application. By running this class
  * @author Faust
+ * @version .1
+ * @since .1
  */
 public class YuGiOhChaosRising {
 
@@ -17,7 +20,14 @@ public class YuGiOhChaosRising {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new MasterTestHarness();
+        for(int i =0; i < args.length; i++) {
+            if(args[i].equalsIgnoreCase("test")) {
+                new MasterTestHarness();
+                break;
+            }
+        }
+
+        new GameCntl();
     }
     
 }

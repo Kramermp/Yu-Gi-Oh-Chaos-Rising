@@ -1,4 +1,4 @@
-package yugioh.chaosrising;
+package yugioh.chaosrising.card;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

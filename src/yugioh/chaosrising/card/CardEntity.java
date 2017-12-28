@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaosrising;
+package yugioh.chaosrising.card;
+
+import yugioh.chaosrising.Entity;
+import yugioh.chaosrising.Player;
 
 /**
  *
  * @author faust_000
  */
-public abstract class CardEntity extends Entity{
+public abstract class CardEntity extends Entity {
     private Card baseCard;
     
     public CardEntity(Player owner, Card card, int[] coordinates) {

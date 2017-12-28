@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaosrising;
+package yugioh.chaosrising.card;
+
+import yugioh.chaosrising.MonsterAttribute;
+import yugioh.chaosrising.card.MonsterCard;
+import yugioh.chaosrising.card.MonsterEffect;
+import yugioh.chaosrising.card.MonsterType;
 
 /**
  *
@@ -13,9 +18,9 @@ public class EffectMonsterCard extends MonsterCard {
     
     private MonsterEffect monsterEffect;
     
-    public EffectMonsterCard(String cardName, MonsterAttribute monsterAttribute, 
-	    int monsterLevel, MonsterType monsterType, String cardDescription,
-	    MonsterEffect monsterEffect, int monsterAttack, int monsterDefense) {
+    public EffectMonsterCard(String cardName, MonsterAttribute monsterAttribute,
+							 int monsterLevel, MonsterType monsterType, String cardDescription,
+							 MonsterEffect monsterEffect, int monsterAttack, int monsterDefense) {
 	super(cardName, monsterAttribute, monsterLevel, monsterType,
 		cardDescription, monsterAttack, monsterDefense);
 	this.monsterEffect = monsterEffect;

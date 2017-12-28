@@ -1,6 +1,6 @@
 package yugioh.testharness.board;
 
-import yugioh.chaosrising.MonsterType;
+import yugioh.chaosrising.card.MonsterType;
 import yugioh.chaosrising.Space;
 import yugioh.chaosrising.SpaceType;
 import yugioh.testharness.SimpleTestHarness;
