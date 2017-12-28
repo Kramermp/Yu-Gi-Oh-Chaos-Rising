@@ -9,9 +9,8 @@ public class UserInterfaceCntl {
 	private UserInterface userInterface = new UserInterface();
 
 
-	public void setDisplay(Component componentToDisplay) {
-		userInterface.removeAll();
-		userInterface.add(componentToDisplay);
+	public void setDisplay(Container container) {
+		userInterface.setContentPane(container);
 		userInterface.revalidate();
 	}
 

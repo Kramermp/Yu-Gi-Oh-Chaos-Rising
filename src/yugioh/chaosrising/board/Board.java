@@ -9,6 +9,7 @@ import yugioh.chaosrising.utils.Direction;
 import yugioh.chaosrising.player.PlayerEntity;
 import yugioh.chaosrising.card.CardEntity;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,14 @@ public class Board {
     private ArrayList<CardEntity> playerTwoCardsOnBoard = new ArrayList<CardEntity>();
     private ArrayList<PlayerEntity> playerEntities = new ArrayList<PlayerEntity>();
 
-
+	public Board() {
+		boardSpaces = new Space[DEFAULT_BOARD_HEIGHT][DEFAULT_BOARD_WIDTH];
+		for (int i =0; i < DEFAULT_BOARD_HEIGHT; i++) {
+			for(int j =0; j < DEFAULT_BOARD_WIDTH; j++) {
+				boardSpaces[i][j] = Space.getTestSpace();
+			}
+		}
+	}
     public Board(Space[][] boardSpaces) {
 		this.boardSpaces = boardSpaces;
     }
@@ -61,6 +69,10 @@ public class Board {
 	 */
 	public Space getSpace(int xCoordinate, int yCoordinate) {
 		return boardSpaces[xCoordinate][yCoordinate];
+	}
+
+	public Dimension getDimension() {
+		return new Dimension(boardSpaces[0].length, boardSpaces.length);
 	}
 
 	// Mutators (Setters)
