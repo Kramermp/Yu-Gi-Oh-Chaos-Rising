@@ -20,7 +20,7 @@ public class MasterBoardTestHarness extends SimpleTestHarness {
 	@Override
 	protected void run() {
 		failureCount+= new BoardTestHarness().getFailureCount();
-		failureCount+= new SpaceTestHarness().getFailureCount();
+//		failureCount+= new SpaceTestHarness().getFailureCount();
 	}
 
 	@Override

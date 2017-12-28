@@ -5,193 +5,87 @@
  */
 package yugioh.chaos.rising;
 
+import org.apache.xpath.SourceTree;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * The Board class is a class that is used to bundle different information about the game. It bundles together the
+ * the information about the location of the different things, and the information about the actual game board allowing
+ * it to keep track of of where the things are vs the spaces, and other thing etc.
  *
  * @author Michael Kramer
  * @version .1
  * @since .1
  */
 public class Board {
-    private Space[][] boardSpaces = new Space[9][9];
+	public static final int DEFAULT_BOARD_WIDTH = 11;
+	public static final int DEFAULT_BOARD_HEIGHT = 11;
+    private Space[][] boardSpaces;
     private ArrayList<CardEntity> playerOneCardsOnBoard = new ArrayList<CardEntity>();
     private ArrayList<CardEntity> playerTwoCardsOnBoard = new ArrayList<CardEntity>();
-    private int[] playerOneLocation = {4,0};
-    private int[] playerTwoLocation = {4,8};
-    
+    private ArrayList<PlayerEntity> playerEntities = new ArrayList<PlayerEntity>();
+
+
     public Board(Space[][] boardSpaces) {
-	this.boardSpaces = boardSpaces;
+		this.boardSpaces = boardSpaces;
     }
-    
-    public Space getSpace(int xCoordinate, int yCoordinate) {
-	return boardSpaces[xCoordinate][yCoordinate];
-    }
-    
-    public void setSpace(int xCoordinate, int yCoordinate, Space newSpace) {
-	boardSpaces[xCoordinate][yCoordinate] = newSpace;
-    }
-    
-    public int[] getPlayerOneLocation() {
-	return this.playerOneLocation;
-    }
-    
-    public int[] getPlayerTwoLocation() {
-	return this.playerTwoLocation;
-    }
+
     public void summonCardEntity(int player, CardEntity card) {
-	switch (player) {
-	    case 1:
-		//System.out.println("Summoning a card entity for player one.");
-		playerOneCardsOnBoard.add(card);
-		break;
-	    case 2:
-		//System.out.println("Summoning a card entity for player two.");
-		playerTwoCardsOnBoard.add(card);
-		
-	}
+		switch (player) {
+			case 1:
+			//System.out.println("Summoning a card entity for player one.");
+			playerOneCardsOnBoard.add(card);
+			break;
+			case 2:
+			//System.out.println("Summoning a card entity for player two.");
+			playerTwoCardsOnBoard.add(card);
+
+		}
     }
+
+    // TODO: Convert this to movePlayer(Player, Direction), maybe
     public void movePlayer(int player, Direction movement) {
-	int[] possibleLocation = new int[2];
-	switch (player) {
-	    case 1:
-		possibleLocation = playerOneLocation.clone(); //Still needs modified for movement
-		switch (movement) {
-		    case UP:
-			possibleLocation[1]++; //Modifies for movement
-			if (validatePlayerOneMovement(possibleLocation)) {
-			    playerOneLocation[1] = playerOneLocation[1] + 1;
-			}
-			break;
-		    case DOWN :
-			possibleLocation[1]--; //Modifies it for movement
-			if (validatePlayerOneMovement(possibleLocation)) {
-			    playerOneLocation[1] = playerOneLocation[1] - 1;
-			}
-			break;
-		    case RIGHT:
-			possibleLocation[0]++; //Modifies it for movement
-			if (validatePlayerOneMovement(possibleLocation)) {
-			    playerOneLocation[0] = playerOneLocation[0] + 1;
-			}
-			break;
-		    case LEFT:
-			possibleLocation[0]--;//Modifies it for movement
-			if (validatePlayerOneMovement(possibleLocation)) {
-			    playerOneLocation[0] = playerOneLocation[0] - 1;
-			}
-			break;
-		}
-		break;
-	    case 2: 
-		possibleLocation = playerTwoLocation.clone(); //Still needs modified for movement
-		switch (movement) {
-		    case UP:
-			possibleLocation[1]++;
-			if (validatePlayerTwoMovement(possibleLocation)) {
-			    playerTwoLocation[1] = playerTwoLocation[1] + 1;
-			}
-			break;
-		    case DOWN :
-			possibleLocation[1]--; //Modifies it for movement
-			if (validatePlayerTwoMovement(possibleLocation)) {
-			    playerTwoLocation[1] = playerTwoLocation[1] - 1;
-			}
-			break;
-		    case RIGHT:
-			possibleLocation[0]++; //Modifies it for movement
-			if (validatePlayerTwoMovement(possibleLocation)) {
-			    playerTwoLocation[0] = playerTwoLocation[0] + 1;
-			}
-			break;
-		    case LEFT:
-			possibleLocation[0]--;//Modifies it for movement
-			if (validatePlayerTwoMovement(possibleLocation)) {
-			    playerTwoLocation[0] = playerTwoLocation[0] - 1;
-			}
-			break;
-		}
-		break;
-	    default:
-		System.out.println("That player is not reconized.");	
-	}
+
     }
-    
-    private boolean validatePlayerOneMovement(int[] desiredLocation) {
-	if (desiredLocation[0] > 8 || desiredLocation[1] > 8 
-	    || desiredLocation[0] < 0 || desiredLocation[1] < 0) {
-	    //System.out.println("The player would move out of bounds. This is not"
-	    //	+ " a valid move.");
-	     return false; //Validats that the player will not move out of bounds.
-	} else if (Arrays.equals(desiredLocation, playerTwoLocation)){
-	    //System.out.println("The players would be on the same space. This is not"
-	    //	+ " a valid move.");
-	    return false;
-	} else {
-	    int playerTwoCardCount = playerTwoCardsOnBoard.size();
-	    for(int i = 0; i < playerTwoCardCount; i++) {
-		CardEntity selectedCard = playerTwoCardsOnBoard.get(i);
-		int[] selectedCardCoordinates = selectedCard.getCoordinates();
-		if (Arrays.equals(desiredLocation, selectedCardCoordinates)) {
-		    //System.out.println("This move would place the player on a space"
-		    //	+ " occupied by an enemy card. This is not a valid move.");
-		    return false;
-		}
-	    }
-	    int playerOneCardCount = playerOneCardsOnBoard.size();    
-	    for(int i = 0; i < playerOneCardCount; i ++) {
-		CardEntity selectedCard = playerOneCardsOnBoard.get(i);
-		int[] selectedCardCoordinates = selectedCard.getCoordinates();
-		if(Arrays.equals(desiredLocation, selectedCardCoordinates)) {
-		    System.out.println("There is a friendly card entity at the"
-			+ " desired location.");
-		    playerOneCardsOnBoard.remove(i);
-		    System.out.println("The friendly card was deleted. (Player One)");
-		}
-	    }
+
+    // Accessors(Getters)
+
+	/**
+	 * Gets a specific Space from the board based off of the provided X coordinate and Y coordinate.
+	 * @param xCoordinate The X coordinate
+	 * @param yCoordinate The Y coordinate
+	 * @return the requested Space object
+	 */
+	public Space getSpace(int xCoordinate, int yCoordinate) {
+		return boardSpaces[xCoordinate][yCoordinate];
 	}
-	return true;
-    }
-    
-    private boolean validatePlayerTwoMovement(int[] desiredLocation) {
-	if (desiredLocation[0] > 8 || desiredLocation[1] > 8 
-	    || desiredLocation[0] < 0 || desiredLocation[1] < 0) {
-	    //System.out.println("The player would move out of bounds. This is not"
-	    //	+ " a valid move.");
-	     return false; //Validats that the player will not move out of bounds.
-	} else if (Arrays.equals(desiredLocation, playerOneLocation)){
-	    //System.out.println("The players would be on the same space. This is not"
-	    //	+ " a valid move.");
-	    return false;
-	} else {
-	    int playerOneCardCount = playerOneCardsOnBoard.size();
-	    for(int i = 0; i < playerOneCardCount; i++) {
-		CardEntity selectedCard = playerOneCardsOnBoard.get(i);
-		int[] selectedCardCoordinates = selectedCard.getCoordinates();
-		//System.out.println(Arrays.toString(selectedCardCoordinates));
-		if (Arrays.equals(desiredLocation, selectedCardCoordinates)) {
-		    //System.out.println("This move would place the player on a space"
-		    //	+ " occupied by an enemy card. This is not a valid move.");
-		    return false;
-		}
-	    }
-	    int playerTwoCardCount = playerTwoCardsOnBoard.size();
-	    for(int i = 0; i < playerTwoCardCount; i ++) {
-		CardEntity selectedCard = playerTwoCardsOnBoard.get(i);
-		int[] selectedCardCoordinates = selectedCard.getCoordinates();
-		if(Arrays.equals(desiredLocation, selectedCardCoordinates)) {
-		    System.out.println("There is a friendly card entity at the"
-			+ " desired location.");
-		    playerTwoCardsOnBoard.remove(i);
-		    System.out.println("The friendly card was deleted. (Player Two)");
-		}
-	    }
+
+	// Mutators (Setters)
+
+	/**
+	 * Sets the Space at the provided X and Y coordinate to the provided Space
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 * @param newSpace
+	 */
+	public void setSpace(Space newSpace, int xCoordinate, int yCoordinate) {
+		boardSpaces[xCoordinate][yCoordinate] = newSpace;
 	}
-	return true;
-    }
-   
-    
-    
-    
+
+	/**
+	 * This method is used by the test harness to retrieve a simple Board for testing.
+	 * @return Board; returns a simple Board for testing purposes
+	 */
+	public static Board getTestBoard() {
+		Space[][] testSpaceArray = new Space[DEFAULT_BOARD_HEIGHT][DEFAULT_BOARD_WIDTH];
+		for (int i =0; i < DEFAULT_BOARD_HEIGHT; i++) {
+			for(int j =0; j < DEFAULT_BOARD_WIDTH; j++) {
+				testSpaceArray[i][j] = Space.getTestSpace();
+			}
+		}
+    	return new Board(testSpaceArray);
+	}
+
 }

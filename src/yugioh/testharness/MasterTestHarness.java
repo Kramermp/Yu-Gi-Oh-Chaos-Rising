@@ -29,8 +29,8 @@ public class MasterTestHarness extends SimpleTestHarness {
 
 	@Override
 	protected void run() {
-    	failureCount+= new MasterCardTestHarness().getFailureCount();
-    	failureCount+= new MasterPlayerTestHarness().getFailureCount();
+//    	failureCount+= new MasterCardTestHarness().getFailureCount();
+//    	failureCount+= new MasterPlayerTestHarness().getFailureCount();
     	failureCount+= new MasterBoardTestHarness().getFailureCount();
 	}
 

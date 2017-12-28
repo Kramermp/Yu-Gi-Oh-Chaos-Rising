@@ -1,11 +1,14 @@
 package yugioh.testharness.board;
 
+import org.apache.xpath.SourceTree;
 import yugioh.chaos.rising.Board;
 import yugioh.chaos.rising.Direction;
 import yugioh.chaos.rising.Space;
 import yugioh.chaos.rising.SpaceType;
 import yugioh.testharness.SimpleTestHarness;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.ReflectPermission;
 import java.util.Arrays;
 
 /**
@@ -18,176 +21,18 @@ import java.util.Arrays;
 public class BoardTestHarness extends SimpleTestHarness {
 
 	public BoardTestHarness() {
+		System.out.println("Creating a BoardTestHarness.");
 		run();
 		printResults();
 	}
 
 	@Override
 	protected void run(){
-		System.out.println("Testing the board Class.");
-		Space[][] testOriginalSpaceArray = new Space[9][9];
-		Space waterSpace = new Space(SpaceType.WATER);
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				testOriginalSpaceArray[i][j] = waterSpace;
-			}
-		}
-
-		Board testBoard = new Board(testOriginalSpaceArray);
-
-		if (testBoard != null) {
-			//System.out.println("The System successfully created the board class.");
-			for (int i = 0; i < 9; i++) {
-				for (int j = 0; j < 9; j++) {
-					if(testOriginalSpaceArray[i][j].getSpaceType() == waterSpace.getSpaceType()){
-						//System.out.println("The System returned the correct space type"
-						//	+ " at " + i + " , " + j);
-					} else {
-						System.out.println("The System failed to return the correct"
-								+ " space type at " + i + " , " + j);
-						failureCount++;
-					}
-				}
-			}
-			//System.out.println("Testing changing space.");
-			Space[][] testNewSpaceArray = new Space[9][9];
-			for (int i = 0; i < 9; i++) {
-				for (int j = 0; j < 9; j++) {
-					testNewSpaceArray[i][j] = waterSpace;
-				}
-			}
-			testNewSpaceArray[0][0] = new Space(SpaceType.CRUSH);
-			testNewSpaceArray[1][0] = new Space(SpaceType.DARK);
-			testNewSpaceArray[2][0] = new Space(SpaceType.FOREST);
-			testNewSpaceArray[3][0] = new Space(SpaceType.LABYRINTH);
-			testNewSpaceArray[4][0] = new Space(SpaceType.MEADOW);
-			testNewSpaceArray[5][0] = new Space(SpaceType.MOUNTAIN);
-			testNewSpaceArray[6][0] = new Space(SpaceType.NORMAL);
-			testNewSpaceArray[7][0] = new Space(SpaceType.TOON);
-			testNewSpaceArray[8][0] = new Space(SpaceType.WASTELAND);
-			testNewSpaceArray[0][1] = new Space(SpaceType.WATER);
-
-			for(int i = 0; i < 9; i++) {
-				for(int j = 0; j < 9; j++) {
-					testBoard.setSpace(i, j , testNewSpaceArray[i][j]);
-				}
-			}
-			for(int i = 0; i < 9; i++) {
-				for(int j = 0; j < 9; j++) {
-					if (testBoard.getSpace(i, j).getSpaceType() == testNewSpaceArray[i][j].getSpaceType()) {
-						//System.out.println("The System correctly changed the space"
-						//    + " at " + i + " , " + j);
-					} else {
-						System.out.println("The System failed to change the space"
-								+ " at " + i + " , " + j);
-						failureCount++;
-					}
-				}
-			}
-
-			//System.out.println("Testing player movement.");
-			int[] expectedPlayerOneLocation = {4,0};
-			if(!Arrays.equals(expectedPlayerOneLocation, testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to place player one at correct place.");
-				failureCount++;
-			}
-			testBoard.movePlayer(1, Direction.UP);
-			expectedPlayerOneLocation[1]++;
-			if(!(Arrays.equals(expectedPlayerOneLocation, testBoard.getPlayerOneLocation()))) {
-				System.out.println("The test board failed to move the player one up.");
-				System.out.println(Arrays.toString(expectedPlayerOneLocation));
-				System.out.println(Arrays.toString(testBoard.getPlayerOneLocation()));
-				failureCount++;
-			}
-			testBoard.movePlayer(1, Direction.RIGHT);
-			expectedPlayerOneLocation[0]++;
-			if(!Arrays.equals(expectedPlayerOneLocation, testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to move the player one right.");
-				failureCount++;
-			}
-			expectedPlayerOneLocation[1]--;
-			testBoard.movePlayer(1, Direction.DOWN);
-			if(!Arrays.equals(expectedPlayerOneLocation, testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to move the player one down.");
-				failureCount++;
-			}
-			testBoard.movePlayer(1, Direction.LEFT);
-			expectedPlayerOneLocation[0]--;
-			if(!Arrays.equals(expectedPlayerOneLocation, testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to move the player one left.");
-				failureCount++;
-			}
-			int[] expectedPlayerTwoLocation = {4,8};
-			if(!Arrays.equals(expectedPlayerTwoLocation, testBoard.getPlayerTwoLocation())) {
-				System.out.println("The test board failed to place player two at correct place.");
-				failureCount++;
-			}
-			testBoard.movePlayer(2, Direction.RIGHT);
-			expectedPlayerTwoLocation[0]++;
-			if(!Arrays.equals(expectedPlayerTwoLocation, testBoard.getPlayerTwoLocation())) {
-				System.out.println("The test board failed to move the player two right.");
-				failureCount++;
-			}
-
-			expectedPlayerTwoLocation[1]--;
-			testBoard.movePlayer(2, Direction.DOWN);
-			if(!Arrays.equals(expectedPlayerTwoLocation, testBoard.getPlayerTwoLocation())) {
-				System.out.println("The test board failed to move the player two down.");
-				failureCount++;
-			}
-			testBoard.movePlayer(2, Direction.LEFT);
-			expectedPlayerTwoLocation[0]--;
-			if(!Arrays.equals(expectedPlayerTwoLocation, testBoard.getPlayerTwoLocation())) {
-				System.out.println("The test board failed to move the player two left.");
-				failureCount++;
-			}
-			testBoard.movePlayer(2, Direction.UP);
-			expectedPlayerTwoLocation[1]++;
-			if(!(Arrays.equals(expectedPlayerTwoLocation, testBoard.getPlayerTwoLocation()))) {
-				System.out.println("The test board failed to move the two player up.");
-				System.out.println(Arrays.toString(expectedPlayerTwoLocation));
-				System.out.println(Arrays.toString(testBoard.getPlayerTwoLocation()));
-				failureCount++;
-			}
-			testBoard.movePlayer(2, Direction.UP);
-			if(!(Arrays.equals(expectedPlayerTwoLocation, testBoard.getPlayerTwoLocation()))) {
-				System.out.println("The test board failed to detect the upper border. (player two)");
-				failureCount++;
-			}
-			testBoard.movePlayer(1, Direction.DOWN);
-			if(!Arrays.equals(expectedPlayerOneLocation, testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to dected the lower border. (player one)");
-				failureCount++;
-			}
-			//System.out.println("Testing player collision now.");
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			testBoard.movePlayer(1, Direction.UP);
-			if(Arrays.equals(testBoard.getPlayerTwoLocation(), testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to detect the player collision.");
-				failureCount++;
-			}
-			testBoard.movePlayer(2, Direction.DOWN);
-			if(Arrays.equals(testBoard.getPlayerTwoLocation(), testBoard.getPlayerOneLocation())) {
-				System.out.println("The test board failed to detect the player collision.");
-				failureCount++;
-			}
-			//Player One is at location 4,7
-			//Player Two is at location 4,8
-
-			//Test moving player two onto the new card entity.
-			//System.out.println(Arrays.toString(testBoard.getPlayerTwoLocation()));
-
-		} else {
-			System.out.println("The System failed to create the board class.");
-		}
-
-		System.out.println("The Board class encountered " + failureCount + " failures.");
+		System.out.println("Running the BoardTestHarness.");
+		testCreation(Board.getTestBoard());
+		testGetters(Board.getTestBoard());
+		testSetters(Board.getTestBoard());
+		testPlayerMovement(Board.getTestBoard());
 	}
 
 	@Override
@@ -198,4 +43,159 @@ public class BoardTestHarness extends SimpleTestHarness {
 			System.err.println("The BoardTestHarness encountered " + failureCount + " errors!");
 		}
 	}
+
+	private void testCreation(Board boardToTest) {
+		if(boardToTest != null) {
+			System.out.println("The Board Class successfully created a Board object.");
+		} else {
+			System.err.println("The Board Class failed to create a Board object.");
+			failureCount++;
+		}
+	}
+
+	private void testGetters(Board testBoard) {
+		testGetSpace(testBoard);
+	}
+
+	private void testSetters(Board testBoard) {
+		testSetSpace(testBoard);
+	}
+
+	private void testPlayerMovement(Board testBoard) {
+		testMovePlayer(testBoard);
+	}
+
+	private void testGetSpace(Board testBoard) {
+		System.out.println("Testing Board.getSpace(int, int)");
+		try {
+			Field spaceArrayField = testBoard.getClass().getDeclaredField("boardSpaces");
+			spaceArrayField.setAccessible(true);
+			Space[][] actualSpaceArray = (Space[][]) spaceArrayField.get(testBoard);
+			Space expectedSpace = actualSpaceArray[0][0];
+			if(expectedSpace == testBoard.getSpace(0, 0)) {
+				System.out.println("The Space returned by Board.getSpace(int, int) matched the source Space.");
+			} else {
+				System.err.println("The Space returned by Board.getSpace(int, int) did not match the source Space.");
+				failureCount++;
+			}
+		} catch (NoSuchFieldException ex) {
+			System.err.println("While testing Board.getSpace(int, int) the field was not found.");
+			System.err.println("There is a problem with the testharness.");
+			ex.printStackTrace();
+			failureCount++;
+		} catch (IllegalAccessException ex) {
+			System.err.println("While testing Board.getSpace(int, int) there was a problem accessing the field. ");
+			System.err.println("There is a problem with the testharness.");
+			ex.printStackTrace();
+			failureCount++;
+		}
+	}
+
+	private void testSetSpace(Board testBoard) {
+		System.out.println("Testting Board.setSpace(Space, int, int)");
+		try {
+			Space theNewSpace = new Space(SpaceType.MEADOW);
+			testBoard.setSpace(theNewSpace, 0, 0);
+			Field spaceArrayField = testBoard.getClass().getDeclaredField("boardSpaces");
+			spaceArrayField.setAccessible(true);
+			Space[][] actualSpaceArray = (Space[][]) spaceArrayField.get(testBoard);
+			Space returnedSpace = actualSpaceArray[0][0];
+			if(theNewSpace == returnedSpace) {
+				System.out.println("The Space returned after Board.setSpace(Space, int, int) matched the Space" +
+						" specified");
+			} else {
+				System.err.println("The Space returned after Board.setSpace(Space, int, int) did not match the Space" +
+						" specified.");
+				failureCount++;
+			}
+		} catch (NoSuchFieldException ex) {
+			System.err.println("While testing Board.setSpace(Space, int, int) the field was not found.");
+			System.err.println("There is a problem with the testharness.");
+			ex.printStackTrace();
+			failureCount++;
+		} catch (IllegalAccessException ex) {
+			System.err.println("While testing Board.setSpace(Space, int, int) there was a problem accessing the field.");
+			System.err.println("There is a problem with the testharness.");
+			ex.printStackTrace();
+			failureCount++;
+		}
+
+	}
+
+	private void testMovePlayer(Board testBoard) {
+//		int[] originalLocation;
+//		int[] expectedLocation;
+//		try {
+//			Field playerOneLocationField = testBoard.getClass().getDeclaredField("playerOneLocation");
+//			playerOneLocationField .setAccessible(true);
+//
+//			originalLocation = ((int[]) playerOneLocationField.get(testBoard)).clone();
+//			System.out.println("The original player location is: " + Arrays.toString(originalLocation));
+//			testBoard.movePlayer(1, Direction.UP);
+//			expectedLocation = new int[] {originalLocation[0], originalLocation[1] - 1};
+//
+//			if(Arrays.equals(expectedLocation, (int[]) playerOneLocationField.get(testBoard))) {
+//				System.out.println("The player Location returned after movePlayer(1, Direction.UP) matched the" +
+//						" expected location.");
+//			} else {
+//				System.err.println("The player Location returned after movePlayer(1, Direction.UP) did not match the" +
+//						" expected location." +
+//						"\nThe original player location was: " + Arrays.toString(originalLocation) +
+//						"\nThe player location returned was: " + Arrays.toString(((int[])playerOneLocationField.get(testBoard))) +
+//						"\nThe player location expected was: " + Arrays.toString(expectedLocation));
+//				failureCount++;
+//			}
+//
+//			originalLocation = ((int[]) playerOneLocationField.get(testBoard)).clone();
+//			testBoard.movePlayer(1, Direction.DOWN);
+//			expectedLocation = new int[] {originalLocation[0], originalLocation[1] + 1};
+//
+//			if(Arrays.equals(expectedLocation, (int[]) playerOneLocationField.get(testBoard))) {
+//				System.out.println("The player Location returned after movePlayer(1, Direction.DOWN) matched the" +
+//						" expected location.");
+//			} else {
+//				System.err.println("The player Location returned after movePlayer(1, Direction.DOWN) did not match the" +
+//						" expected location.");
+//				failureCount++;
+//			}
+//
+//			originalLocation = ((int[]) playerOneLocationField.get(testBoard)).clone();
+//			testBoard.movePlayer(1, Direction.LEFT);
+//			expectedLocation = new int[] {originalLocation[0] - 1, originalLocation[1]};
+//
+//			if(Arrays.equals(expectedLocation, (int[]) playerOneLocationField.get(testBoard))) {
+//				System.out.println("The player Location returned after movePlayer(1, Direction.LEFT) matched the" +
+//						" expected location.");
+//			} else {
+//				System.err.println("The player Location returned after movePlayer(1, Direction.LEFT) did not match the" +
+//						" expected location.");
+//				failureCount++;
+//			}
+//
+//			originalLocation = ((int[]) playerOneLocationField.get(testBoard)).clone();
+//			testBoard.movePlayer(1, Direction.LEFT);
+//			expectedLocation = new int[] {originalLocation[0] + 1, originalLocation[1]};
+//
+//			if(Arrays.equals(expectedLocation, (int[]) playerOneLocationField.get(testBoard))) {
+//				System.out.println("The player Location returned after movePlayer(1, Direction.RIGHT) matched the" +
+//						" expected location.");
+//			} else {
+//				System.err.println("The player Location returned after movePlayer(1, Direction.RIGHT) did not match the" +
+//						" expected location.");
+//				failureCount++;
+//			}
+//
+//		} catch (NoSuchFieldException ex) {
+//			System.err.println("While testing Board.getPlayerOneLocation() the field was not found.");
+//			System.err.println("There is a problem with the testharness.");
+//			ex.printStackTrace();
+//			failureCount++;
+//		} catch (IllegalAccessException ex) {
+//			System.err.println("While testing Board.getPlayerOneLocation()there was a problem accessing the field.");
+//			System.err.println("There is a problem with the testharness.");
+//			ex.printStackTrace();
+//			failureCount++;
+//		}
+	}
+
 }

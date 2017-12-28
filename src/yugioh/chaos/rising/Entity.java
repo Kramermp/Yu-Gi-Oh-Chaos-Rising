@@ -7,15 +7,21 @@ package yugioh.chaos.rising;
 
 /**
  *
- * @author faust_000
+ * @author Michael Kramer
+ * @version .1
+ * @since .1
  */
-class Entity {
+public abstract class Entity {
     private Player owner; //Which player owns this entity
     private int[] coordinates = new int[2]; //Location of the entity
-    
+
+	public Entity() {
+
+	}
+
     public Entity(Player owner, int[] coordinates) {
-	this.owner = owner;
-	this.coordinates = coordinates;
+		this.owner = owner;
+		this.coordinates = coordinates;
     }
     
     public Player getOwner() {
