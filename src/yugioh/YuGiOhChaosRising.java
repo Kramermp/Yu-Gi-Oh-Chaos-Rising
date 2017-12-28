@@ -5,7 +5,6 @@
  */
 package yugioh;
 
-import yugioh.chaosrising.GameCntl;
 import yugioh.testharness.MasterTestHarness;
 
 /**
@@ -27,7 +26,6 @@ public class YuGiOhChaosRising {
             }
         }
 
-        new GameCntl();
     }
     
 }
