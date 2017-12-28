@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaosrising;
+package yugioh.chaosrising.utils;
+
+import yugioh.chaosrising.player.Player;
 
 /**
  *

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaosrising;
+package yugioh.chaosrising.board;
 
+import yugioh.chaosrising.utils.Direction;
+import yugioh.chaosrising.player.PlayerEntity;
 import yugioh.chaosrising.card.CardEntity;
 
 import java.util.ArrayList;

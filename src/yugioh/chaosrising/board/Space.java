@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaosrising;
+package yugioh.chaosrising.board;
 
 import yugioh.chaosrising.card.MonsterType;
 
@@ -19,7 +19,7 @@ public class Space {
     private SpaceType spaceType = DEFAULT_SPACETYPE;
     private ArrayList<MonsterType> monstersStrengthened = new ArrayList<MonsterType>();
     private ArrayList<MonsterType> monstersWeakened = new ArrayList<MonsterType>();
-    private MagicEffect spaceEffect = new MagicEffect();
+    //private MagicEffect spaceEffect = new MagicEffect();
     
     public Space (SpaceType spaceType) {
 		this.spaceType = spaceType;
@@ -48,7 +48,7 @@ public class Space {
 		//stacking the lists
 		monstersStrengthened.clear();
 		monstersWeakened.clear();
-		spaceEffect = null;
+		//spaceEffect = null;
 		switch(this.spaceType) {
 			case NORMAL:
 				//Normal spaces reduce nothing and strengthen nothing just break

@@ -5,7 +5,7 @@
  */
 package yugioh.testharness.player.model;
 
-import yugioh.chaosrising.Player;
+import yugioh.chaosrising.player.Player;
 import yugioh.testharness.SimpleTestHarness;
 
 /**

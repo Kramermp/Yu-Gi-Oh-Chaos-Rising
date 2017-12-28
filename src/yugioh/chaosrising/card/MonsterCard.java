@@ -5,8 +5,6 @@
  */
 package yugioh.chaosrising.card;
 
-import yugioh.chaosrising.MonsterAttribute;
-
 /**
  *
  * @author mpk5206

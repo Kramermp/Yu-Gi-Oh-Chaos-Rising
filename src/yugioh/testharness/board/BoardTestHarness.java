@@ -1,8 +1,8 @@
 package yugioh.testharness.board;
 
-import yugioh.chaosrising.Board;
-import yugioh.chaosrising.Space;
-import yugioh.chaosrising.SpaceType;
+import yugioh.chaosrising.board.Board;
+import yugioh.chaosrising.board.Space;
+import yugioh.chaosrising.board.SpaceType;
 import yugioh.testharness.SimpleTestHarness;
 
 import java.lang.reflect.Field;

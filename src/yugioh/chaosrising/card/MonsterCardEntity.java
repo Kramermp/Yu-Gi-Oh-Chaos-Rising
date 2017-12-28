@@ -5,8 +5,7 @@
  */
 package yugioh.chaosrising.card;
 
-import yugioh.chaosrising.MonsterAttribute;
-import yugioh.chaosrising.Player;
+import yugioh.chaosrising.player.Player;
 
 /**
  *

@@ -5,8 +5,8 @@
  */
 package yugioh.chaosrising.card;
 
-import yugioh.chaosrising.Entity;
-import yugioh.chaosrising.Player;
+import yugioh.chaosrising.utils.Entity;
+import yugioh.chaosrising.player.Player;
 
 /**
  *

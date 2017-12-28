@@ -1,10 +1,10 @@
 package yugioh.testharness.card.enitity;
 
-import yugioh.chaos.rising.*;
-import yugioh.chaosrising.*;
+import yugioh.chaosrising.card.MonsterAttribute;
 import yugioh.chaosrising.card.MonsterCard;
 import yugioh.chaosrising.card.MonsterCardEntity;
 import yugioh.chaosrising.card.MonsterType;
+import yugioh.chaosrising.player.Player;
 import yugioh.testharness.SimpleTestHarness;
 
 import java.util.Arrays;

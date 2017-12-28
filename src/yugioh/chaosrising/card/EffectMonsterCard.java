@@ -5,10 +5,7 @@
  */
 package yugioh.chaosrising.card;
 
-import yugioh.chaosrising.MonsterAttribute;
-import yugioh.chaosrising.card.MonsterCard;
-import yugioh.chaosrising.card.MonsterEffect;
-import yugioh.chaosrising.card.MonsterType;
+import yugioh.chaosrising.magiceffects.MonsterEffect;
 
 /**
  *
