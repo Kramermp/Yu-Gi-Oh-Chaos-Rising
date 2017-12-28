@@ -1,6 +1,7 @@
 package yugioh.testharness.card.enitity;
 
 import yugioh.chaos.rising.*;
+import yugioh.chaosrising.*;
 import yugioh.testharness.SimpleTestHarness;
 
 import java.util.Arrays;

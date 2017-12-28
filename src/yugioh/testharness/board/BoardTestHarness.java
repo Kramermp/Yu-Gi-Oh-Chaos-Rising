@@ -1,15 +1,11 @@
 package yugioh.testharness.board;
 
-import org.apache.xpath.SourceTree;
-import yugioh.chaos.rising.Board;
-import yugioh.chaos.rising.Direction;
-import yugioh.chaos.rising.Space;
-import yugioh.chaos.rising.SpaceType;
+import yugioh.chaosrising.Board;
+import yugioh.chaosrising.Space;
+import yugioh.chaosrising.SpaceType;
 import yugioh.testharness.SimpleTestHarness;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ReflectPermission;
-import java.util.Arrays;
 
 /**
  * This class is the TestHarness for the Board class. It runs through the Board class and tests its different methods.

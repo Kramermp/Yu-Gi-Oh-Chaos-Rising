@@ -1,4 +1,4 @@
-package yugioh.chaos.rising;
+package yugioh.chaosrising;
 
 public class PlayerEntity extends Entity {
 

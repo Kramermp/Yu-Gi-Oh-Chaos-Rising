@@ -5,9 +5,9 @@
  */
 package yugioh.testharness.card.model;
 
-import yugioh.chaos.rising.MonsterAttribute;
-import yugioh.chaos.rising.MonsterCard;
-import yugioh.chaos.rising.MonsterType;
+import yugioh.chaosrising.MonsterAttribute;
+import yugioh.chaosrising.MonsterCard;
+import yugioh.chaosrising.MonsterType;
 import yugioh.testharness.SimpleTestHarness;
 
 /**

@@ -1,8 +1,8 @@
 package yugioh.testharness.board;
 
-import yugioh.chaos.rising.MonsterType;
-import yugioh.chaos.rising.Space;
-import yugioh.chaos.rising.SpaceType;
+import yugioh.chaosrising.MonsterType;
+import yugioh.chaosrising.Space;
+import yugioh.chaosrising.SpaceType;
 import yugioh.testharness.SimpleTestHarness;
 
 import java.util.ArrayList;

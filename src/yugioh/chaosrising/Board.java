@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package yugioh.chaos.rising;
-
-import org.apache.xpath.SourceTree;
+package yugioh.chaosrising;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * The Board class is a class that is used to bundle different information about the game. It bundles together the
