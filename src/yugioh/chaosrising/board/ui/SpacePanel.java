@@ -1,9 +1,11 @@
 package yugioh.chaosrising.board.ui;
 
 import yugioh.chaosrising.board.Space;
+import yugioh.chaosrising.player.PlayerEntity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class SpacePanel extends JPanel {
 
@@ -47,5 +49,13 @@ public class SpacePanel extends JPanel {
 				setBackground(Color.YELLOW);
 				break;
 		}
+	}
+
+	public void drawImage(BufferedImage imageToDraw) {
+		System.out.println("Here");
+		Graphics g = this.getGraphics();
+		g.drawImage(imageToDraw, 0, 0, getWidth(), getHeight(), null);
+
+
 	}
 }

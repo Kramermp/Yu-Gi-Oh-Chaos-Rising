@@ -5,6 +5,7 @@
  */
 package yugioh.chaosrising.board;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
 import yugioh.chaosrising.utils.Direction;
 import yugioh.chaosrising.player.PlayerEntity;
 import yugioh.chaosrising.card.CardEntity;
@@ -102,6 +103,10 @@ public class Board {
 			}
 		}
     	return new Board(testSpaceArray);
+	}
+
+	public ArrayList<PlayerEntity> getPlayerEntities() {
+		return this.playerEntities;
 	}
 
 }
