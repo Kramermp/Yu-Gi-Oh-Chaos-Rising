@@ -36,7 +36,10 @@ public class Board {
 				boardSpaces[i][j] = Space.getTestSpace();
 			}
 		}
+		playerEntities.add(new PlayerEntity());
+		playerEntities.add(new PlayerEntity());
 	}
+
     public Board(Space[][] boardSpaces) {
 		this.boardSpaces = boardSpaces;
     }

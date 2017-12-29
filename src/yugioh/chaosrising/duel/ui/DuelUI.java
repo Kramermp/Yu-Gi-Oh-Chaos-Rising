@@ -16,7 +16,6 @@ public class DuelUI extends JPanel{
 		configurePanel();
 		buildSpacePanelArray();
 		drawBoard();
-		setBackground(Color.BLUE);
 	}
 
 	private void configurePanel() {
@@ -39,6 +38,9 @@ public class DuelUI extends JPanel{
 			for(int j =0; j < spacePanelArray[0].length; j++) {
 				c.gridx = j;
 				c.gridy = i;
+				c.weightx = 1;
+				c.weighty = 1;
+				c.fill = GridBagConstraints.BOTH;
 				add(spacePanelArray[i][j], c);
 			}
 		}
